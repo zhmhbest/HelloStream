@@ -1,3 +1,4 @@
+from typing import List, Tuple, Union
 from ffmpeg.FFBaseCommand import FFBaseCommand
 
 
@@ -5,7 +6,7 @@ class FFEasyCommand(FFBaseCommand):
     def __init__(self, mpeg_location: str = "ffmpeg", play_location: str = "ffplay", probe_location: str = "ffprobe"):
         FFBaseCommand.__init__(self, mpeg_location, play_location, probe_location)
 
-    def play(self, src: str, title='', shape=None, loop=0):
+    def play(self, src: str, title: str = '', shape: Tuple[int, int] = None, loop=0):
         """
         播放视频
         :param src:
@@ -35,7 +36,7 @@ class FFEasyCommand(FFBaseCommand):
         """
         self.ffprobe(['-v', 'quiet', '-show_streams', '-select_streams', 'a', '-i', src])
 
-    def detach(self, src: str, path_to_video=None, path_to_audio=None):
+    def detach(self, src: str, path_to_video: str = None, path_to_audio: str = None):
         """
         分离视频和音频
         :param src: 视频文件
@@ -50,7 +51,7 @@ class FFEasyCommand(FFBaseCommand):
             # 分离出音频
             self.ffmpeg(['-i', src, '-vcodec', 'copy', '-vn', f'{path_to_audio}.aac'])
 
-    def repack(self, srcs: str or [str, ...], path_to_save: str):
+    def repack(self, srcs: Union[str, List[str]], path_to_save: str):
         """
         重新封装视频 或 合并视频和音频
         :param srcs:
@@ -68,7 +69,7 @@ class FFEasyCommand(FFBaseCommand):
         cmd.extend(['-vcodec', 'copy', '-acodec', 'copy', path_to_save])
         self.ffmpeg(cmd)
 
-    def cut_key(self, src: str, start_time, duration_or_end_time, output: str):
+    def cut_key(self, src: str, start_time: str, duration_or_end_time: Union[str, int], output: str):
         """
         关键帧裁剪视频
         但会造成几秒的误差，只能落在关键帧上
@@ -87,7 +88,7 @@ class FFEasyCommand(FFBaseCommand):
             output, '-y'
         ])
 
-    def cut_acc(self, src: str, start_time, duration_or_end_time, output: str):
+    def cut_acc(self, src: str, start_time: str, duration_or_end_time: Union[str, int], output: str):
         """
         精准裁剪
         :param src:
@@ -107,7 +108,7 @@ class FFEasyCommand(FFBaseCommand):
             output, '-y'
         ])
 
-    def combine(self, src_list: list, output: str):
+    def combine(self, src_list: List[str], output: str):
         """
         合并多个视频
         :param src_list: [视频地址1, 视频地址2, ...]
@@ -134,7 +135,7 @@ class FFEasyCommand(FFBaseCommand):
             self,
             src_audio: str, output: str, to_format: str,
             acodec: str = None,
-            brc: (int, int, int) = None
+            brc: Tuple[int, int, int] = None
     ):
         """
         编码Audio
