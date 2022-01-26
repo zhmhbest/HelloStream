@@ -1,0 +1,26 @@
+<html><head>
+    <meta charset="UTF-8">
+    <title>JSMpeg Demo</title>
+    <script src="jsmpeg.min.js"></script>
+    <style>body { background-color: #333; }</style>
+</head><body>
+    <canvas style="width: 300px; height: 300px;"></canvas>
+    <script>
+        const domCanvas = document.querySelector("canvas");
+        function playVideo(url) {
+            return new window.JSMpeg.Player(url, {
+                canvas: domCanvas,
+                progressive: true,
+                chunkSize: 32 * 1024, // 32K
+                decodeFirstFrame: false,
+                disableWebAssembly: true,
+                disableGl: true,
+                video: true,
+                audio: false,
+                autoplay: true,
+                loop: false
+            });
+        }
+        playVideo("视频地址");
+    </script>
+</body></html>
