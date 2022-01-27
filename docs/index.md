@@ -118,7 +118,7 @@ ffprobe -v quiet -show_streams -select_streams v video.mp4
     -re ; 以本地帧频读数据
     -r/-framerate   <帧率> ; eg: 24
     -s              <窗口> ; eg: 352x288
-    -aspect         <比例>  ; eg: 4:3 16:9
+    -aspect         <比例> ; eg: 4:3 16:9
     -g              <关键帧间隔>    ; eg: 300
     -bf             <B帧数目控制>   ; eg: 2
     ; libx264
@@ -257,8 +257,30 @@ ffplay -protocol_whitelist "udp,rtp" -i rtp://127.0.0.1:1234
 **浏览器视频推流**：
 
 ```bash
-# 推送视频到指定服务地址
-ffmpeg -re -i video.mp4 -c:v mpeg1video -f mpegts -an -r 24 -s 1366x768 -q:v 8.0 http://127.0.0.1:1234/stream
+# 转发 流 到HTTP服务
+ffmpeg \
+    -re -i video.mp4 \
+    -c:v mpeg1video -f mpegts -an -r 24 -s 1366x768 -q:v 8.0 \
+    http://127.0.0.1:1234/stream/test
+```
+
+```go
+// https://github.com/wanghaoxi3000/gin-rtsp.git
+
+// 接收 FFmpeg 写入的流
+func WSWrapper(c *gin.Context) {
+    reader := bufio.NewReader(c.Request.Body)
+    for {
+        data, err := reader.ReadBytes('\n')
+        if err != nil { break }
+        service.WsManager.Groupbroadcast(c.Param("channel"), data)
+    }
+}
+
+// 将 HTTP 转换为 WS 供给前端播放
+func WSPlay(c *gin.Context) {
+    service.WsManager.RegisterClient(c)
+}
 ```
 
 @import "src/jsmpeg.html" {code_block=true}

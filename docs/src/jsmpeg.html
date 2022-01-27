@@ -6,6 +6,7 @@
 </head><body>
     <canvas style="width: 300px; height: 300px;"></canvas>
     <script>
+        // 播放 WS 流
         const domCanvas = document.querySelector("canvas");
         function playVideo(url) {
             return new window.JSMpeg.Player(url, {
