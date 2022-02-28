@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="https://zhmhbest.gitee.io/hellomathematics/style/index.css">
-<script src="https://zhmhbest.gitee.io/hellomathematics/style/index.js"></script>
-
 # [Stream](https://github.com/zhmhbest/HelloStream)
 
 [TOC]
@@ -260,7 +257,7 @@ ffplay -protocol_whitelist "udp,rtp" -i rtp://127.0.0.1:1234
 # 转发 流 到HTTP服务
 ffmpeg \
     -re -i video.mp4 \
-    -c:v mpeg1video -f mpegts -an -r 24 -s 1366x768 -q:v 8.0 \
+    -fflags nobuffer -c:v mpeg1video -f mpegts -an -r 24 -s 1366x768 -q:v 8.0 \
     http://127.0.0.1:1234/stream/test
 ```
 
