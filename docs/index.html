@@ -21,8 +21,8 @@
 }
 /* 主体 */
 html body {
-  background-color: black;
   color: #DDDDDD;
+  background-color: #333333;
 }
 /* 滚动条 */
 ::-webkit-scrollbar {
@@ -38,10 +38,11 @@ html body {
   border-radius: 32px;
 }
 .markdown-preview.markdown-preview {
-  /* 自定义样式 */
   /* 总体样式 */
-  background-color: #333333;
   color: #DDDDDD;
+  background-color: #333333;
+  /* 自定义样式 */
+  /* 内容缩进 */
   /* 标题 */
   /* 标题链接 */
   /* 引用 */
@@ -57,60 +58,55 @@ html body {
 .markdown-preview.markdown-preview .highlight {
   color: #99FFFF;
 }
+.markdown-preview.markdown-preview h1 ~ *,
+.markdown-preview.markdown-preview h2 ~ *,
+.markdown-preview.markdown-preview h3 ~ *,
+.markdown-preview.markdown-preview h4 ~ * {
+  margin-left: 64px;
+  width: auto;
+}
 .markdown-preview.markdown-preview h1 {
   color: #EF7823;
-  margin-bottom: 8px;
+  margin-left: 0px;
+  margin-bottom: 32px;
   border-bottom: 1px solid gray;
 }
 .markdown-preview.markdown-preview h1:before {
   content: "🌞";
 }
-.markdown-preview.markdown-preview h1 ~ * {
-  margin-left: 8px;
-}
 .markdown-preview.markdown-preview h2 {
   color: #FF69B4;
-  margin-bottom: 8px;
-  border-bottom: 1px solid gray;
+  margin-left: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed gray;
 }
 .markdown-preview.markdown-preview h2:before {
   content: "🌙";
 }
-.markdown-preview.markdown-preview h2 ~ * {
-  margin-left: 16px;
-}
 .markdown-preview.markdown-preview h3 {
   color: #DEDA00;
-  margin-bottom: 8px;
-  border-bottom: 1px dashed gray;
+  margin-left: 32px;
+  margin-bottom: 16px;
+  border-bottom: 1px dashed #444;
 }
 .markdown-preview.markdown-preview h3:before {
   content: "⭐";
 }
-.markdown-preview.markdown-preview h3 ~ * {
-  margin-left: 24px;
-}
 .markdown-preview.markdown-preview h4 {
   color: #5CD009;
-  margin-bottom: 8px;
-  border-bottom: 1px dashed gray;
+  margin-left: 48px;
+  margin-bottom: 16px;
 }
 .markdown-preview.markdown-preview h4:before {
   content: "💡";
 }
-.markdown-preview.markdown-preview h4 ~ * {
-  margin-left: 32px;
-}
 .markdown-preview.markdown-preview h5 {
   color: #FFFFFF;
-  margin-bottom: 8px;
-  border-bottom: 1px dashed gray;
+  margin-left: 64px;
+  margin-bottom: 16px;
 }
 .markdown-preview.markdown-preview h5:before {
   content: "✿";
-}
-.markdown-preview.markdown-preview h5 ~ * {
-  margin-left: 40px;
 }
 .markdown-preview.markdown-preview h1 > a,
 .markdown-preview.markdown-preview h2 > a,
@@ -132,8 +128,8 @@ html body {
   background-color: rgba(100, 100, 100, 0.6);
   border-left: 5px solid;
   padding: 0.5em;
-  margin-bottom: 16px;
-  margin-top: 16px;
+  margin-bottom: 32px;
+  margin-top: 32px;
 }
 .markdown-preview.markdown-preview em {
   color: inherit;
@@ -154,12 +150,6 @@ html body {
   border-radius: 3px;
 }
 .markdown-preview.markdown-preview p:not(blockquote p) {
-  margin-bottom: 8px;
-}
-.markdown-preview.markdown-preview ul,
-.markdown-preview.markdown-preview ol,
-.markdown-preview.markdown-preview dl {
-  margin-top: 8px;
   margin-bottom: 16px;
 }
 .markdown-preview.markdown-preview table {
@@ -178,7 +168,7 @@ html body {
 }
 .markdown-preview.markdown-preview pre {
   border-radius: 3px;
-  margin-top: 8px;
+  margin-top: 16px;
   margin-bottom: 16px;
 }
 
